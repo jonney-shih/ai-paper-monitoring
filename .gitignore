@@ -7,3 +7,4 @@ data/seen.json
 data/
 *.log
 .claude/settings.local.json
+reports/

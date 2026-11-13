@@ -90,6 +90,7 @@ def main():
             counts[n["source"]] = counts.get(n["source"], 0) + 1
             picked.append(n)
     md = render(by_topic, picked)
+    out.parent.mkdir(exist_ok=True)  # 新环境(例如刚 clone 下来)可能还没有 reports/
     out.write_text(md, encoding="utf-8")
     out.with_suffix(".html").write_text(md_to_html(md), encoding="utf-8")
     build_index(out.parent)
