@@ -1,0 +1,201 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AI 前沿每日简报 · 2026-11-11</title><style>
+body{font-family:"Microsoft JhengHei","Segoe UI",sans-serif;max-width:860px;margin:2rem auto;padding:0 1rem;
+line-height:1.6;color:#222;background:#fff}
+h1{border-bottom:2px solid #444;padding-bottom:.3rem}
+h2{margin-top:2.2rem;border-left:5px solid #2b6cb0;padding-left:.6rem}
+h3{margin:1.6rem 0 .3rem;font-size:1.05rem}
+ul{margin:.2rem 0 .8rem;padding-left:1.3rem}li{margin:.15rem 0}
+a{color:#1a56a8;text-decoration:none}a:hover{text-decoration:underline}
+em{color:#777}
+@media (prefers-color-scheme:dark){body{background:#1b1b1f;color:#e6e6e6}a{color:#7db3ff}em{color:#999}
+h1{border-color:#888}h2{border-color:#4a90d9}}
+</style></head><body><h1>AI 前沿每日简报 · 2026-11-11</h1>
+<h2>Model(模型)</h2>
+<h3><a href="https://huggingface.co/papers/2611.11558" target="_blank">InfraRSI: Harnessing Recursive Self-Improvement for Training Infrastructure</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-08 · 作者:InfraRSI Team, Yuchuan Tian, Haocheng Mei, Ye Yuan, Chao Xu</li>
+<li>摘要(原文节选):While Recursive Self-Improvement (RSI) accelerates isolated algorithm and kernel synthesis, distributed LLM training depends on tightly coupled launch settings, operator kernels, and communication schedules, where single edits often hit out-of-memory (OOM) boundaries, compiler conflicts, measurement jitter, or silent numerical drift. We present InfraRSI, the agentic harness that turns open-ended human commands into verified training optimizations via a five-stage workflow: init locks editable scope and a fixed task contract over workload, loss, and timing invariants to prevent reward hacking, doctor profiles baseline phases and calibrates cluster noise, run co-optimizes launch knobs and code patches before re-verifying top candidates against the baseline and logging findings to a cross-hardware experience bank, and report and apply audit source paths, track failed-trial costs, and commit promoted changes.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=17</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.12886" target="_blank">Reframe: Observation-Aligned Multi-Teacher On-Policy Distillation for Agentic Visual Reasoning</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-09 · 作者:Haozhi Yuan, Handong Li, Yifan Zhang, Qianshan Wei</li>
+<li>摘要(原文节选):Agentic reinforcement learning (RL) and multi-teacher on-policy distillation (MOPD) offer complementary routes to post-training. For visual agents, however, tool use presents two related challenges.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=38</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.08240" target="_blank">FewStepRL: Fine-tuning Few-step Diffusion Models with Reinforcement Learning</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-05 · 作者:Haitao Lin, Minsi Ren, Yang Li, Xingtong Ge, Zheyuan Hu</li>
+<li>摘要(原文节选):Reinforcement learning (RL) has become a standard post-training method for diffusion models, but most RL objectives roll out the current policy at every iteration, and with a many-step sampler these rollouts typically dominate the cost of training. Few-step models cut this cost, yet they model an average velocity over an interval, whereas existing RL objectives are built for an instantaneous velocity with a many-step sampler.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=8</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.12411" target="_blank">PhysOPSD: Code as Privilege for Physically Plausible Video Generation</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-09 · 作者:Harold Haodong Chen, Rui Peng, Lingteng Qiu, Kejie Qiu, Chao Xu</li>
+<li>摘要(原文节选):While modern video generative models achieve remarkable visual fidelity, they remain noticeably brittle when generating physically plausible dynamics and complex interactions. Targeted post-training is crucial, yet supervised fine-tuning suffers from offline state mismatch, and reinforcement learning is hindered by sparse, ill-defined physical reward functions.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=6</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.05927" target="_blank">Modality-Aware Expert Pruning for MoE-Based Multimodal Large Language Models</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-04 · 作者:Donggeun Kim</li>
+<li>摘要(原文节选):Mixture-of-Experts (MoE) enables multimodal large language models (MLLMs) to scale capacity efficiently, but expert parameters dominate memory even though only a few experts are activated per token: they account for over 90% of model size in modern MoE-MLLMs (e.g., 54 GB out of about 58 GB in BF16 for InternVL3.5-30B-A3B and Qwen3-VL-30B-A3B). Expert pruning has emerged as an effective compression strategy, but existing methods aggregate importance uniformly across tokens, ignoring that the same expert may serve different roles for vision versus language processing.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=1</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.11994" target="_blank">EmoHarness: Boosting Multimodal Emotion Understanding with Meta-Harness Evolving</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-09 · 作者:Fenghai Li, Bingxuan Li, Jiawen Zhang, Yifan Shen, Jiateng Liu</li>
+<li>摘要(原文节选):Small multimodal models can misjudge emotion when words, voice, and visual cues conflict. We present EmoHarness, which runs such a model, the frozen student, inside a harness: the prompts, settings, and verification code around its calls.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=2</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.08935" target="_blank">SkinMind: Equipping Agentic RAG with Human-Inspired Graph Probing for Reliable Dermatology AI</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-06 · 作者:Jing Hao, Weinan Zhou, Zhihong Lu, Yaling Shen, Yiming Xu</li>
+<li>摘要(原文节选):Reliable dermatology AI requires access to verifiable evidence distributed across heterogeneous textual and visual sources. However, conventional retrieval-augmented generation (RAG) typically relies on one-shot retrieval from flat corpora, limiting its ability to adapt retrieval granularity, explore multi-hop relations, and integrate multimodal clinical evidence.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=4</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.12806" target="_blank">Learning Heterogeneous Tactile Representation for General Dexterous Manipulation</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-09 · 作者:Bing Han, Yichuan Peng, Haoyu Dong, Yuanmeng Hu, Yongyi Jia</li>
+<li>摘要(原文节选):Tactile sensing is an indispensable modality for contact-rich dexterous manipulation, a capability that hints at the ultimate frontiers of embodied intelligence. However, commercially available tactile sensors are still at a relatively early stage of development, with each type of sensor offering irreplaceable strengths alongside its own drawbacks.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=94</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h2>Agentic Engineering</h2>
+<h3><a href="https://huggingface.co/papers/2611.10592" target="_blank">MotionGraphicsBench: Evaluating Motion Graphics Generation with Programmatic Verification</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-07 · 作者:Jiaju Ma, Ashvini Kumar Jindal, Chuhua Wang, Sumithra Bhakthavatsalam</li>
+<li>摘要(原文节选):Large language models can generate motion graphics from static images and natural language requests, but it remains difficult to evaluate how well models can follow requests that combine spatial, appearance, and temporal requirements. We introduce MotionGraphicsBench, an expert-curated benchmark of 100 instances for animating an input static SVG with a motion edit prompt.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=10</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.09124" target="_blank">Toward the Era of Agentic Embodied Intelligence</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-06 · 作者:Chao Liang, Ke Chen, Fengxiaoxiao Li, Shibo Huang, Yufeng Sun</li>
+<li>摘要(原文节选):Foundation models increasingly guide robot actions, yet sustained autonomy requires efficient control and failure recovery. We introduce A2-MEAS, an embodied multi-agent framework built around code as a scaling interface.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=50</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.12885" target="_blank">World In-Context Learning for Agentic Robot Manipulation</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-09 · 作者:Heng Fang, Zehui Guo, Yuehan Zhang, Mingyang Du, Dingkang Liang</li>
+<li>摘要(原文节选):Trained action policies write manipulation skill into network weights, tying what is learned to the distribution it is learned from. In-context learning (ICL) avoids this coupling but has not matched trained policies, because a demonstration recorded in another scene carries no feedback from the world the robot currently faces.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=12</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.01112" target="_blank">Auriga Technical Report: A Task-Agnostic Agent Harness for Zero-Shot Embodied Manipulation</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-10-31 · 作者:Chengcheng Wang, Yuheng Shi, Siyu Xu, Yutong Wang, Jinjing Zhao</li>
+<li>摘要(原文节选):Vision-language models can interpret instructions and plan manipulation tasks, yet struggle when acting directly as robot policies. On RoboDojo, a large planning-execution gap separates high-level task decisions from physical execution: removing arm execution raises GPT-6 Astra&#x27;s success rate from 22.5% under the reference control interface to 76.2%.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=4</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.11558" target="_blank">InfraRSI: Harnessing Recursive Self-Improvement for Training Infrastructure</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-08 · 作者:InfraRSI Team, Yuchuan Tian, Haocheng Mei, Ye Yuan, Chao Xu</li>
+<li>摘要(原文节选):While Recursive Self-Improvement (RSI) accelerates isolated algorithm and kernel synthesis, distributed LLM training depends on tightly coupled launch settings, operator kernels, and communication schedules, where single edits often hit out-of-memory (OOM) boundaries, compiler conflicts, measurement jitter, or silent numerical drift. We present InfraRSI, the agentic harness that turns open-ended human commands into verified training optimizations via a five-stage workflow: init locks editable scope and a fixed task contract over workload, loss, and timing invariants to prevent reward hacking, doctor profiles baseline phases and calibrates cluster noise, run co-optimizes launch knobs and code patches before re-verifying top candidates against the baseline and logging findings to a cross-hardware experience bank, and report and apply audit source paths, track failed-trial costs, and commit promoted changes.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=17</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.12886" target="_blank">Reframe: Observation-Aligned Multi-Teacher On-Policy Distillation for Agentic Visual Reasoning</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-09 · 作者:Haozhi Yuan, Handong Li, Yifan Zhang, Qianshan Wei</li>
+<li>摘要(原文节选):Agentic reinforcement learning (RL) and multi-teacher on-policy distillation (MOPD) offer complementary routes to post-training. For visual agents, however, tool use presents two related challenges.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=38</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.08452" target="_blank">ReproBridge: Building Reproducibility into ML Research Artifacts</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-05 · 作者:Yubo Wang, Rui Meng, Jaehyun Nam, Tomas Pfister, Jinsung Yoon</li>
+<li>摘要(原文节选):Reproducing machine learning experiments requires reconstructing procedures from information scattered across papers, released code, and supporting artifacts. For coding agents, reproduction success can therefore depend on their ability to fill in missing details, rather than on the released artifacts alone.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=30</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.10404" target="_blank">Coding or Cheating? An Investigation of Frontier Coding LLMs</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-07 · 作者:Yuntao Gui</li>
+<li>摘要(原文节选):Frontier agentic LLMs are trained on verifiable rewards in reinforcement learning (RL) environments built from real software repositories. A passing test suite is treated as the reward for solving the task.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=5</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h2>Physical AI</h2>
+<h3><a href="https://huggingface.co/papers/2611.12806" target="_blank">Learning Heterogeneous Tactile Representation for General Dexterous Manipulation</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-09 · 作者:Bing Han, Yichuan Peng, Haoyu Dong, Yuanmeng Hu, Yongyi Jia</li>
+<li>摘要(原文节选):Tactile sensing is an indispensable modality for contact-rich dexterous manipulation, a capability that hints at the ultimate frontiers of embodied intelligence. However, commercially available tactile sensors are still at a relatively early stage of development, with each type of sensor offering irreplaceable strengths alongside its own drawbacks.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=94</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.01729" target="_blank">ODE Policy: Robot Learning via Action Dynamics, Not Actions</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-01 · 作者:Jindou Jia, Jingliang Li, Kuangji Zuo, Tuo An, Yuxuan Hu</li>
+<li>摘要(原文节选):Most robot policies, whether trained by imitation learning (IL) or reinforcement learning (RL), map observations to action values at discrete control steps and leave the continuity of physical motion to be learned implicitly. We propose ODE policy, which learns the dynamics of the action rather than the action itself.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=2</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.01112" target="_blank">Auriga Technical Report: A Task-Agnostic Agent Harness for Zero-Shot Embodied Manipulation</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-10-31 · 作者:Chengcheng Wang, Yuheng Shi, Siyu Xu, Yutong Wang, Jinjing Zhao</li>
+<li>摘要(原文节选):Vision-language models can interpret instructions and plan manipulation tasks, yet struggle when acting directly as robot policies. On RoboDojo, a large planning-execution gap separates high-level task decisions from physical execution: removing arm execution raises GPT-6 Astra&#x27;s success rate from 22.5% under the reference control interface to 76.2%.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=4</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.09124" target="_blank">Toward the Era of Agentic Embodied Intelligence</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-06 · 作者:Chao Liang, Ke Chen, Fengxiaoxiao Li, Shibo Huang, Yufeng Sun</li>
+<li>摘要(原文节选):Foundation models increasingly guide robot actions, yet sustained autonomy requires efficient control and failure recovery. We introduce A2-MEAS, an embodied multi-agent framework built around code as a scaling interface.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=50</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.12885" target="_blank">World In-Context Learning for Agentic Robot Manipulation</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-09 · 作者:Heng Fang, Zehui Guo, Yuehan Zhang, Mingyang Du, Dingkang Liang</li>
+<li>摘要(原文节选):Trained action policies write manipulation skill into network weights, tying what is learned to the distribution it is learned from. In-context learning (ICL) avoids this coupling but has not matched trained policies, because a demonstration recorded in another scene carries no feedback from the world the robot currently faces.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=12</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.10771" target="_blank">WorldFoundry: Towards Unified Infrastructure for World Intelligence</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-07 · 作者:Juanxi Tian, Jiadong Hou, Baiang Li, Xin Lin, Zhengbo Jiao</li>
+<li>摘要(原文节选):Visual generative models increasingly blur the line between synthesizing observations and simulating environments. Yet visual plausibility alone does not constitute successful world modeling: compelling outputs may lack persistent state, physical dynamics, or causally consistent responses to interactions.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=54</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.13482" target="_blank">ExRL: Sample-Efficient Online Adaptation of Long-Chunk Policies via Execution Length Control</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-10 · 作者:Xu Luo, Jiaying Yang, Hao Wu, Junlin Xie, Zijin Hong</li>
+<li>摘要(原文节选):Predicting long action chunks, often spanning dozens of timesteps, has become a key ingredient in increasingly capable robot policies. In this paper, we find that adapting these long-chunk policies with existing reinforcement learning (RL) methods can require many online samples due to the high dimensionality of the action chunks being optimized, making such adaptation impractical in real-world scenarios where interaction data are costly to collect.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=4</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h3><a href="https://huggingface.co/papers/2611.12870" target="_blank">SWAM: Scaling World Action Models with Cross-Modal Alignment</a></h3>
+<ul>
+<li>来源:HuggingFace Daily Papers · 发布:2026-11-09 · 作者:Yu Zhou, Xinyuan Xia, Xuankun Yang, Yinghao Yang, Wendi Chen</li>
+<li>摘要(原文节选):World action models jointly predict video and actions conditioned on language. Existing studies focus primarily on architectures and training mechanisms, typically treating language-video alignment acquired through video pretraining as an established foundation.</li>
+<li>如何找到:<a href="https://huggingface.co/papers" target="_blank">https://huggingface.co/papers</a> · upvotes=3</li>
+<li>中文重点:<em>(待补:可交给 Claude 依摘要产生繁中重点)</em></li>
+</ul>
+<h2>重大消息</h2>
+<ul>
+<li><a href="https://openai.com/index/gilbert-tobin-sam-nickless" target="_blank">Gilbert + Tobin rethinks the business of law with AI</a> — OpenAI (Thu, 12 Nov 2026)</li>
+<li><a href="https://openai.com/index/helping-caregivers-use-ai-in-everyday-life" target="_blank">Helping caregivers use AI in everyday life</a> — OpenAI (Tue, 10 Nov 2026)</li>
+<li><a href="https://openai.com/index/introducing-businesses-chatgpt" target="_blank">Introducing Businesses in ChatGPT</a> — OpenAI (Tue, 10 Nov 2026)</li>
+<li><a href="https://openai.com/index/closing-ai-guidance-gap-education" target="_blank">Closing the AI guidance gap in education</a> — OpenAI (Tue, 10 Nov 2026)</li>
+<li><a href="https://openai.com/index/ai-effect-on-freelance-work" target="_blank">Work at the Frontier: AI’s effect on freelance work</a> — OpenAI (Tue, 10 Nov 2026)</li>
+<li><a href="https://openai.com/index/chatgpt-enterprise-aws-marketplace" target="_blank">ChatGPT Enterprise now available in AWS Marketplace</a> — OpenAI (Mon, 09 Nov 2026)</li>
+<li><a href="https://openai.com/index/control-room" target="_blank">Control Room: A central system to track and stop model workloads across our research infrastructure</a> — OpenAI (Mon, 09 Nov 2026)</li>
+<li><a href="https://openai.com/index/coderabbit-codex-daybreak" target="_blank">CodeRabbit scales agentic software development and ships 20x more</a> — OpenAI (Mon, 09 Nov 2026)</li>
+<li><a href="https://openai.com/index/kuken" target="_blank">Kuken Industries searches 70 years of drawings in minutes</a> — OpenAI (Mon, 09 Nov 2026)</li>
+<li><a href="https://openai.com/index/partnering-with-hacktron" target="_blank">Partnering with Hacktron to find vulnerabilities in OpenAI’s systems</a> — OpenAI (Fri, 06 Nov 2026)</li>
+<li><a href="https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science" target="_blank">Measuring how AI agents handle everyday wet-lab science</a> — OpenAI (Fri, 06 Nov 2026)</li>
+<li><a href="https://openai.com/index/australian-universities-ai-native-graduates" target="_blank">Australian universities are creating AI-native graduates</a> — OpenAI (Thu, 05 Nov 2026)</li>
+<li><a href="https://openai.com/index/cultfit-builds-with-codex" target="_blank">Cult.fit builds operational muscle with Codex</a> — OpenAI (Thu, 05 Nov 2026)</li>
+<li><a href="https://openai.com/index/introducing-gpt-6-cyber" target="_blank">GPT‑6 Cyber: Advancing the frontier of aligned cybersecurity agents</a> — OpenAI (Thu, 05 Nov 2026)</li>
+<li><a href="https://openai.com/index/merge-builds-with-openai" target="_blank">Merge builds product and business tools with OpenAI technology</a> — OpenAI (Thu, 05 Nov 2026)</li>
+</ul></body></html>

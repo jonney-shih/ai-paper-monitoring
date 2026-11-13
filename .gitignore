@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+data/seen.json
+.venv/
+
+# 暂存/备份数据,不上传
+data/
+*.log
+.claude/settings.local.json

@@ -1,0 +1,8 @@
+{
+  "name": "ai-paper-monitoring-node",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AI 前沿论文监控(Node.js 版,无第三方依赖,需 Node 18+)",
+  "scripts": { "start": "node main.js" }
+}

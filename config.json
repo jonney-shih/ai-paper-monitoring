@@ -1,0 +1,23 @@
+{
+  "lookback_days": 2,
+  "max_per_source": 60,
+  "topics": {
+    "model": ["large language model", "LLM", "foundation model", "reasoning", "multimodal", "diffusion", "mixture-of-experts", "scaling law", "post-training", "reinforcement learning"],
+    "agentic": ["agent", "agentic", "tool use", "tool-use", "multi-agent", "computer use", "MCP", "planning", "code agent", "workflow"],
+    "physical_ai": ["robot", "robotics", "embodied", "vision-language-action", "VLA", "manipulation", "humanoid", "world model", "sim-to-real", "autonomous driving"]
+  },
+  "arxiv": {
+    "enabled": true,
+    "categories": ["cs.AI", "cs.LG", "cs.CL", "cs.CV", "cs.RO", "cs.MA"]
+  },
+  "huggingface_daily": { "enabled": true },
+  "rss": {
+    "enabled": true,
+    "feeds": [
+      {"name": "OpenAI", "url": "https://openai.com/news/rss.xml"},
+      {"name": "Google DeepMind", "url": "https://deepmind.google/blog/rss.xml"},
+      {"name": "NVIDIA Technical Blog", "url": "https://developer.nvidia.com/blog/feed"},
+      {"name": "Hugging Face Blog", "url": "https://huggingface.co/blog/feed.xml"}
+    ]
+  }
+}
