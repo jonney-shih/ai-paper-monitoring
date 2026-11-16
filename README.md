@@ -45,6 +45,16 @@ powershell -ExecutionPolicy Bypass -File .\setup_schedule.ps1 -Remove    # 取�
 `data/` 与 `reports/` 不会上传 GitHub,每台电脑各自记录「已看过」与产生报告,
 因此两台电脑的报告内容可能略有不同;之后更新程序只需 `git pull`。
 
+## X 动态(手动读取)
+报告里的「X 动态」区块来自 `data/x/YYYY-MM-DD.json`。它**不是自动抓取**:需要你在 Claude Code 里请 Claude
+用已登入 X 的 Chrome(装有 Claude 扩充功能)读取 X 搜索结果,Claude 整理后写入这个文件。
+
+- 固定的搜索条件在 `config.json` 的 `x_posts.queries`(model / agentic / physical_ai,依点赞数筛选、英文)。
+- 对 Claude 说「读 X 动态」→ 它依序搜三组、写入当天 JSON → 重跑 `python src/main.py`(同日重跑会合并)即可更新报告。
+- 当天没有 JSON 时,报告会显示「今日尚未读取 X 动态」,不影响其他区块。
+- 注意:自动化读取 X 不符合 X 的使用条款,仅建议偶尔手动使用;读完请自行登出 X。
+- JSON 每则含 `topic`(model/agentic/physical_ai)、`handle`、`url`、`summary`,可选 `time`、`likes`、`views`、`note`。
+
 ## 后续可扩充
 - 把报告交给 Claude 产生繁体中文摘要与重点(报告内已预留栏位)
 - 加入 X(Twitter)动态:官方 API 按量计费,或先用手动「收件匣」方式

@@ -15,6 +15,7 @@ from report import build_index, classify, md_to_html, render
 ROOT = Path(__file__).resolve().parent.parent
 SEEN = ROOT / "data" / "seen.json"
 NEWS_PER_SOURCE = 4
+XDIR = ROOT / "data" / "x"  # 每日 X 动态(JSON 清单)
 DAILY = ROOT / "data" / "daily"  # 当天已抓内容的暂存,供同日重跑合并
 
 
@@ -89,7 +90,12 @@ def main():
         if counts.get(n["source"], 0) < NEWS_PER_SOURCE:
             counts[n["source"]] = counts.get(n["source"], 0) + 1
             picked.append(n)
-    md = render(by_topic, picked)
+    # X 动态:由 Claude 在你要求时读取 X 后写入 data/x/<日期>.json;没有就留空提示
+    try:
+        x_posts = json.loads((XDIR / f"{today}.json").read_text(encoding="utf-8"))
+    except Exception:
+        x_posts = []
+    md = render(by_topic, picked, x_posts=x_posts)
     out.parent.mkdir(exist_ok=True)  # 新环境(例如刚 clone 下来)可能还没有 reports/
     out.write_text(md, encoding="utf-8")
     out.with_suffix(".html").write_text(md_to_html(md), encoding="utf-8")

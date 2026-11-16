@@ -39,6 +39,7 @@ def _inline(s):
     s = html.escape(s)
     s = re.sub(r"\[([^\]]+)\]\((https?://[^)\s]+)\)", r'<a href="\2" target="_blank">\1</a>', s)
     s = re.sub(r"(?<![\"=>])(https?://[^\s<)]+)", r'<a href="\1" target="_blank">\1</a>', s)
+    s = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", s)
     return re.sub(r"(?<![\w])_([^_]+)_(?![\w])", r"<em>\1</em>", s)
 
 
@@ -46,7 +47,7 @@ def md_to_html(md):
     """把 render() 产生的简单 Markdown(标题/清单/链接/斜体)转成 HTML 页面。"""
     body, in_ul, title = [], False, "AI 前沿每日简报"
     for line in md.splitlines():
-        if in_ul and not line.startswith("- "):
+        if in_ul and not line.startswith(("- ", "  - ")):
             body.append("</ul>")
             in_ul = False
         if line.startswith("# "):
@@ -56,6 +57,8 @@ def md_to_html(md):
             body.append(f"<h2>{_inline(line[3:])}</h2>")
         elif line.startswith("### "):
             body.append(f"<h3>{_inline(line[4:])}</h3>")
+        elif line.startswith("  - "):
+            body.append(f'<li style="margin-left:1.2rem;list-style:circle">{_inline(line[4:])}</li>')
         elif line.startswith("- "):
             if not in_ul:
                 body.append("<ul>")
@@ -102,7 +105,28 @@ def build_index(reports_dir):
     return out
 
 
-def render(items_by_topic, news, today=None):
+def _x_section(x_posts):
+    """「X 动态」区块。x_posts: 每则含 topic/handle/url/summary,另有 time/likes/views/note。
+    故意不用 ### 标题,以免目录页把它算成论文。"""
+    out = ["## X 动态", ""]
+    if not x_posts:
+        return out + ["_今日尚未读取 X 动态(需请 Claude 读取,见 README)。_", ""]
+    for topic in TOPIC_LABEL:
+        rows = [p for p in x_posts if p.get("topic") == topic]
+        if not rows:
+            continue
+        out += [f"**{TOPIC_LABEL[topic]}**", ""]
+        for p in rows:
+            meta = " · ".join(str(x) for x in (p.get("time"), p.get("likes") and f"{p['likes']} 赞",
+                                               p.get("views") and f"{p['views']} 浏览") if x)
+            out.append(f"- [@{p['handle']}]({p['url']}) — {p['summary']}" + (f"({meta})" if meta else ""))
+            if p.get("note"):
+                out.append(f"  - ⚠ {p['note']}")
+        out.append("")
+    return out + ["_来源:X 搜索(手动读取),未逐则查证,使用前请开原文确认。_", ""]
+
+
+def render(items_by_topic, news, today=None, x_posts=None):
     today = today or date.today().isoformat()
     out = [f"# AI 前沿每日简报 · {today}", ""]
     for topic, items in items_by_topic.items():
@@ -125,4 +149,5 @@ def render(items_by_topic, news, today=None):
     for it in news:
         out += [f"- [{it['title']}]({it['url']}) — {it['source']} ({it['published']})"]
     out.append("")
+    out += _x_section(x_posts)
     return "\n".join(out)

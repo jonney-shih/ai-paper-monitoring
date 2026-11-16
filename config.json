@@ -10,6 +10,14 @@
     "enabled": true,
     "categories": ["cs.AI", "cs.LG", "cs.CL", "cs.CV", "cs.RO", "cs.MA"]
   },
+  "x_posts": {
+    "_note": "X 动态由 Claude 在你要求时手动读取(见 README),结果存到 data/x/YYYY-MM-DD.json;下列是固定的搜索条件",
+    "queries": {
+      "model": "(LLM OR \"foundation model\" OR \"new model\" OR benchmark) min_faves:1000 lang:en -filter:replies",
+      "agentic": "(agentic OR \"AI agents\" OR \"coding agent\" OR MCP) min_faves:1000 lang:en -filter:replies",
+      "physical_ai": "(\"physical AI\" OR humanoid OR robotics OR \"world model\" OR VLA) min_faves:500 lang:en -filter:replies"
+    }
+  },
   "huggingface_daily": { "enabled": true },
   "rss": {
     "enabled": true,
