@@ -13,9 +13,10 @@
   "x_posts": {
     "_note": "X 动态由 Claude 在你要求时手动读取(见 README),结果存到 data/x/YYYY-MM-DD.json;下列是固定的搜索条件",
     "queries": {
-      "model": "(LLM OR \"foundation model\" OR \"new model\" OR benchmark) min_faves:1000 lang:en -filter:replies",
-      "agentic": "(agentic OR \"AI agents\" OR \"coding agent\" OR MCP) min_faves:1000 lang:en -filter:replies",
-      "physical_ai": "(\"physical AI\" OR humanoid OR robotics OR \"world model\" OR VLA) min_faves:500 lang:en -filter:replies"
+      "_note": "{since} 换成 7 天前的日期(YYYY-MM-DD),否则热门排序会混进几个月前的旧帖;一组滚动 4 到 5 次约可读 6 到 10 则",
+      "model": "(\"new model\" OR \"we are releasing\" OR \"now available\" OR benchmark OR \"open-source model\") (LLM OR model) min_faves:700 lang:en since:{since} -filter:replies",
+      "agentic": "(agentic OR \"AI agents\" OR \"coding agent\" OR MCP) min_faves:500 lang:en since:{since} -filter:replies",
+      "physical_ai": "(\"physical AI\" OR humanoid OR robotics OR \"world model\" OR VLA) min_faves:300 lang:en since:{since} -filter:replies"
     }
   },
   "huggingface_daily": { "enabled": true },
