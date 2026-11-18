@@ -105,10 +105,13 @@ def build_index(reports_dir):
     return out
 
 
-def _x_section(x_posts):
+def _x_section(x_posts, period=None):
     """「X 动态」区块。x_posts: 每则含 topic/handle/url/summary,另有 time/likes/views/note。
+    period: (起, 迄) 日期字串,标出这批内容涵盖的区间。
     故意不用 ### 标题,以免目录页把它算成论文。"""
     out = ["## X 动态", ""]
+    if x_posts and period and period[0]:
+        out += [f"_涵盖区间:{period[0]} 至 {period[1] or ''}(依上次读取日到本次)_", ""]
     if not x_posts:
         return out + ["_今日尚未读取 X 动态(需请 Claude 读取,见 README)。_", ""]
     for topic in TOPIC_LABEL:
@@ -126,7 +129,7 @@ def _x_section(x_posts):
     return out + ["_来源:X 搜索(手动读取),未逐则查证,使用前请开原文确认。_", ""]
 
 
-def render(items_by_topic, news, today=None, x_posts=None):
+def render(items_by_topic, news, today=None, x_posts=None, x_period=None):
     today = today or date.today().isoformat()
     out = [f"# AI 前沿每日简报 · {today}", ""]
     for topic, items in items_by_topic.items():
@@ -149,5 +152,5 @@ def render(items_by_topic, news, today=None, x_posts=None):
     for it in news:
         out += [f"- [{it['title']}]({it['url']}) — {it['source']} ({it['published']})"]
     out.append("")
-    out += _x_section(x_posts)
+    out += _x_section(x_posts, x_period)
     return "\n".join(out)

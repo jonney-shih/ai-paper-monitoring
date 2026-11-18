@@ -91,11 +91,17 @@ def main():
             counts[n["source"]] = counts.get(n["source"], 0) + 1
             picked.append(n)
     # X 动态:由 Claude 在你要求时读取 X 后写入 data/x/<日期>.json;没有就留空提示
+    # JSON 可以是清单,或 {"since","until","posts"}(标明涵盖区间)
+    x_period = None
     try:
-        x_posts = json.loads((XDIR / f"{today}.json").read_text(encoding="utf-8"))
+        x_data = json.loads((XDIR / f"{today}.json").read_text(encoding="utf-8"))
     except Exception:
-        x_posts = []
-    md = render(by_topic, picked, x_posts=x_posts)
+        x_data = []
+    if isinstance(x_data, dict):
+        x_period = (x_data.get("since"), x_data.get("until"))
+        x_data = x_data.get("posts", [])
+    x_posts = x_data
+    md = render(by_topic, picked, x_posts=x_posts, x_period=x_period)
     out.parent.mkdir(exist_ok=True)  # 新环境(例如刚 clone 下来)可能还没有 reports/
     out.write_text(md, encoding="utf-8")
     out.with_suffix(".html").write_text(md_to_html(md), encoding="utf-8")

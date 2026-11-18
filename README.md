@@ -50,6 +50,9 @@ powershell -ExecutionPolicy Bypass -File .\setup_schedule.ps1 -Remove    # 取�
 用已登入 X 的 Chrome(装有 Claude 扩充功能)读取 X 搜索结果,Claude 整理后写入这个文件。
 
 - 固定的搜索条件在 `config.json` 的 `x_posts.queries`(model / agentic / physical_ai,依点赞数筛选、英文)。
+- **读取区间 = 上次读取日到本次**:条件里的 `{since}` 用 `data/x/` 里最新一份 JSON 的日期(第一次则用 7 天前),
+  所以偶尔才读也不会漏掉中间的日子。间隔很久(超过约两周)时,按点赞数排序只会留下最热门的,较小的消息可能漏掉。
+- JSON 可写成 `{"since": "起", "until": "迄", "posts": [...]}`,报告会标出「涵盖区间」;直接写清单也行。
 - 对 Claude 说「读 X 动态」→ 它依序搜三组、写入当天 JSON → 重跑 `python src/main.py`(同日重跑会合并)即可更新报告。
 - 当天没有 JSON 时,报告会显示「今日尚未读取 X 动态」,不影响其他区块。
 - 注意:自动化读取 X 不符合 X 的使用条款,仅建议偶尔手动使用;读完请自行登出 X。
