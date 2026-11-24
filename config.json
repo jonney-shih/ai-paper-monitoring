@@ -19,6 +19,40 @@
       "physical_ai": "(\"physical AI\" OR humanoid OR robotics OR \"world model\" OR VLA) min_faves:300 lang:en since:{since} -filter:replies"
     }
   },
+  "media": {
+    "_note": "影片/播客/newsletter:只抓近 lookback_days 天、每个来源最多 per_source 则。YouTube 频道 ID 已逐个核对过名称。The Batch 找不到可用 RSS,暂不收。",
+    "enabled": true,
+    "lookback_days": 7,
+    "per_source": 2,
+    "groups": {"tech": "技术深度", "business": "产业与商业", "weekly": "每周整理", "official": "官方频道"},
+    "feeds": [
+      {"group": "tech", "name": "Andrej Karpathy (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCXUPKJO5MZQN11PqgIvyuvQ"},
+      {"group": "tech", "name": "Yannic Kilcher (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCZHmQk67mSJgfCCTn7xBfew"},
+      {"group": "tech", "name": "Two Minute Papers (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg"},
+      {"group": "tech", "name": "AI Explained (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCNJ1Ymd5yFuUPtn21xtRbbw"},
+      {"group": "tech", "name": "Machine Learning Street Talk (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCMLtBahI5DMrt0NPvDSoIRQ"},
+      {"group": "tech", "name": "Ahead of AI (Sebastian Raschka)", "url": "https://magazine.sebastianraschka.com/feed"},
+      {"group": "tech", "name": "Lil'Log (Lilian Weng)", "url": "https://lilianweng.github.io/index.xml"},
+      {"group": "tech", "name": "Simon Willison's Weblog", "url": "https://simonwillison.net/atom/everything/"},
+      {"group": "tech", "name": "Interconnects (Nathan Lambert)", "url": "https://www.interconnects.ai/feed"},
+      {"group": "business", "name": "Dwarkesh Patel (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCXl4i9dYBrFOabk0xGmbkRA"},
+      {"group": "business", "name": "Lex Fridman (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCSHZKyawb77ixDdsGog4iWA"},
+      {"group": "business", "name": "Latent Space", "url": "https://www.latent.space/feed"},
+      {"group": "business", "name": "No Priors (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCSI7h9hydQ40K5MJHnCrQvw"},
+      {"group": "business", "name": "Sequoia Capital (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCWrF0oN6unbXrWsTN7RctTw"},
+      {"group": "business", "name": "a16z (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC9cn0TuPq4dnbTY-CBsm8XA"},
+      {"group": "business", "name": "One Useful Thing (Ethan Mollick)", "url": "https://www.oneusefulthing.org/feed"},
+      {"group": "business", "name": "SemiAnalysis", "url": "https://newsletter.semianalysis.com/feed"},
+      {"group": "weekly", "name": "Import AI (Jack Clark)", "url": "https://importai.substack.com/feed"},
+      {"group": "weekly", "name": "Ben's Bites", "url": "https://www.bensbites.com/feed"},
+      {"group": "official", "name": "Google DeepMind (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCP7jMXSY2xbc3KCAE0MHQ-A"},
+      {"group": "official", "name": "OpenAI (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCXZCJLdBC09xxGZ6gcdrc6A"},
+      {"group": "official", "name": "Anthropic (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCrDwWp7EBBv4NwvScIpBDOA"},
+      {"group": "official", "name": "NVIDIA (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCHuiy8bXnmK5nisYHUd1J5g"},
+      {"group": "official", "name": "Hugging Face (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCHlNU7kIZhRgSbhHvFoy72w"},
+      {"group": "official", "name": "Boston Dynamics (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC7vVhkEfw4nOGp8TyDk7RcQ"}
+    ]
+  },
   "huggingface_daily": { "enabled": true },
   "rss": {
     "enabled": true,

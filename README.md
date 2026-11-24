@@ -45,6 +45,13 @@ powershell -ExecutionPolicy Bypass -File .\setup_schedule.ps1 -Remove    # 取�
 `data/` 与 `reports/` 不会上传 GitHub,每台电脑各自记录「已看过」与产生报告,
 因此两台电脑的报告内容可能略有不同;之后更新程序只需 `git pull`。
 
+## 影片、播客与文章(自动)
+`config.json` 的 `media.feeds` 列出 YouTube 频道、播客与 newsletter 的 RSS(分 技术深度 / 产业与商业 / 每周整理 / 官方频道 四组),
+每天自动抓近 7 天、每个来源最多 2 则,略过 YouTube Shorts,放进报告「影片、播客与文章」区块。
+- 只有标题、来源、日期;程序看不到影片内容,需要重点可请 Claude 读字幕或原文。
+- YouTube 频道 ID 已逐个用频道名称核对;新增来源时请同样核对(`https://www.youtube.com/feeds/videos.xml?channel_id=UC...`)。
+- The Batch 找不到可用 RSS,暂不收。
+
 ## X 动态(手动读取)
 报告里的「X 动态」区块来自 `data/x/YYYY-MM-DD.json`。它**不是自动抓取**:需要你在 Claude Code 里请 Claude
 用已登入 X 的 Chrome(装有 Claude 扩充功能)读取 X 搜索结果,Claude 整理后写入这个文件。

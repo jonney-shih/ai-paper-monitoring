@@ -129,7 +129,24 @@ def _x_section(x_posts, period=None):
     return out + ["_来源:X 搜索(手动读取),未逐则查证,使用前请开原文确认。_", ""]
 
 
-def render(items_by_topic, news, today=None, x_posts=None, x_period=None):
+def _media_section(media, groups):
+    """「影片、播客与文章」区块:依 config 的分组列出,每则只有标题、来源、日期(程序看不到影片内容)。"""
+    out = ["## 影片、播客与文章", ""]
+    if not media:
+        return out + ["_近期没有新内容。_", ""]
+    for key, label in (groups or {"": ""}).items():
+        rows = [m for m in media if m.get("group", "") == key]
+        if not rows:
+            continue
+        out += [f"**{label}**" if label else "", ""]
+        for m in rows:
+            title = m["title"].replace("[", "(").replace("]", ")")
+            out.append(f"- [{title}]({m['url']}) — {m['source']} ({m['published']})")
+        out.append("")
+    return out + ["_只列标题与来源;影片内容程序读不到,需要重点可请 Claude 读字幕或原文。_", ""]
+
+
+def render(items_by_topic, news, today=None, x_posts=None, x_period=None, media=None, media_groups=None):
     today = today or date.today().isoformat()
     out = [f"# AI 前沿每日简报 · {today}", ""]
     for topic, items in items_by_topic.items():
@@ -152,5 +169,6 @@ def render(items_by_topic, news, today=None, x_posts=None, x_period=None):
     for it in news:
         out += [f"- [{it['title']}]({it['url']}) — {it['source']} ({it['published']})"]
     out.append("")
+    out += _media_section(media, media_groups)
     out += _x_section(x_posts, x_period)
     return "\n".join(out)

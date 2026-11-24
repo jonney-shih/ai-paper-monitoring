@@ -71,6 +71,53 @@ def fetch_hf_daily():
     return items
 
 
+MEDIA = "{http://search.yahoo.com/mrss/}"
+
+
+def _parse_dt(s):
+    """RSS(RFC 822)或 Atom(ISO 8601)日期 → 带时区的 datetime;失败回 None。"""
+    s = (s or "").strip()
+    if not s:
+        return None
+    try:
+        from email.utils import parsedate_to_datetime
+        dt = parsedate_to_datetime(s)
+    except Exception:
+        try:
+            dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
+        except Exception:
+            return None
+    return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+
+
+def fetch_media(name, url, group, per_source=2, lookback_days=7):
+    """YouTube 频道 / 播客 / newsletter 的 RSS(Atom):只取近 lookback_days 天、每个来源最多 per_source 则。"""
+    root = ET.fromstring(_get(url))
+    cutoff = datetime.now(timezone.utc) - timedelta(days=lookback_days)
+    items = []
+    for it in root.iter("item"):
+        ts = _parse_dt(it.findtext("pubDate"))
+        link = (it.findtext("link") or "").strip()
+        items.append((ts, link, (it.findtext("title") or "").strip(),
+                      " ".join((it.findtext("description") or "").split())))
+    for it in root.iter(f"{ATOM}entry"):
+        link = it.find(f"{ATOM}link")
+        href = link.get("href") if link is not None else ""
+        ts = _parse_dt(it.findtext(f"{ATOM}published") or it.findtext(f"{ATOM}updated"))
+        desc = it.findtext(f"{ATOM}summary") or it.findtext(f"{MEDIA}group/{MEDIA}description") or ""
+        items.append((ts, href, (it.findtext(f"{ATOM}title") or "").strip(), " ".join(desc.split())))
+    out = []
+    # 略过 YouTube Shorts(几十秒的短片,信息量低,会占掉名额)
+    for ts, link, title, desc in sorted((i for i in items if i[0] and i[1] and "/shorts/" not in i[1]),
+                                        key=lambda i: i[0], reverse=True):
+        if ts < cutoff or len(out) >= per_source:
+            break
+        out.append({"id": link, "title": title, "url": link, "summary": desc[:300], "source": name,
+                    "group": group, "published": ts.date().isoformat(), "authors": [],
+                    "found_via": f"RSS · {url}"})
+    return out
+
+
 def fetch_rss(name, url, limit=15):
     """官方博客 / 新闻 RSS(支援 RSS 2.0 与 Atom)。"""
     root = ET.fromstring(_get(url))
