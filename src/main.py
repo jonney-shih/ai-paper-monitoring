@@ -5,6 +5,7 @@
 import argparse
 import json
 import sys
+import time
 from datetime import date
 from pathlib import Path
 
@@ -40,7 +41,14 @@ def main():
     args = ap.parse_args()
 
     cfg = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
-    papers, news, media = [], [], []
+    papers, news, media, confs = [], [], [], []
+
+    ccfg = cfg.get("conferences", {})
+    if ccfg.get("enabled"):
+        for v in ccfg["venues"]:
+            time.sleep(3.2)  # arXiv API 请求间隔礼貌性等待
+            confs += safe(v["name"], sources.fetch_conference, v["name"], v["query"],
+                          ccfg.get("lookback_days", 14), ccfg.get("per_venue", 5))
 
     mcfg = cfg.get("media", {})
     if mcfg.get("enabled"):
@@ -66,6 +74,7 @@ def main():
         fresh.append(p)
     news = [n for n in news if n["id"] and n["id"] not in seen]
     media = [m for m in media if m["id"] and m["id"] not in seen]
+    confs = [c for c in confs if c["id"] not in seen]
 
     # 同一天重跑:合并当天已抓到的内容,避免覆盖掉先前的报告
     today = date.today().isoformat()
@@ -73,17 +82,19 @@ def main():
     try:
         prev = json.loads(cache.read_text(encoding="utf-8"))
     except Exception:
-        prev = {"papers": [], "news": [], "media": []}
+        prev = {"papers": [], "news": [], "media": [], "confs": []}
     have_p = {p["id"] for p in fresh}
     have_n = {n["id"] for n in news}
     have_m = {m["id"] for m in media}
+    have_c = {c["id"] for c in confs}
+    confs = confs + [c for c in prev.get("confs", []) if c["id"] not in have_c]
     fresh = fresh + [p for p in prev["papers"] if p["id"] not in have_p]
     news = news + [n for n in prev["news"] if n["id"] not in have_n]
     media = media + [m for m in prev.get("media", []) if m["id"] not in have_m]
     ids = {p["id"] for p in fresh}
     DAILY.mkdir(parents=True, exist_ok=True)
-    cache.write_text(json.dumps({"papers": fresh, "news": news, "media": media}, ensure_ascii=False),
-                     encoding="utf-8")
+    cache.write_text(json.dumps({"papers": fresh, "news": news, "media": media, "confs": confs},
+                                ensure_ascii=False), encoding="utf-8")
 
     by_topic = {t: [] for t in cfg["topics"]}
     for p in fresh:
@@ -112,16 +123,17 @@ def main():
         x_data = x_data.get("posts", [])
     x_posts = x_data
     md = render(by_topic, picked, x_posts=x_posts, x_period=x_period,
-                media=media, media_groups=mcfg.get("groups", {}))
+                media=media, media_groups=mcfg.get("groups", {}), confs=confs,
+                conf_order=[v["name"] for v in ccfg.get("venues", [])])
     out.parent.mkdir(exist_ok=True)  # 新环境(例如刚 clone 下来)可能还没有 reports/
     out.write_text(md, encoding="utf-8")
     out.with_suffix(".html").write_text(md_to_html(md), encoding="utf-8")
     build_index(out.parent)
 
     SEEN.parent.mkdir(exist_ok=True)
-    SEEN.write_text(json.dumps(sorted(seen | ids | {n["id"] for n in news} | {m["id"] for m in media})),
-                    encoding="utf-8")
-    print(f"完成:{out}  (论文 {len(fresh)} 篇,新闻 {len(news)} 则,影片/播客/文章 {len(media)} 则)")
+    SEEN.write_text(json.dumps(sorted(seen | ids | {n["id"] for n in news} | {m["id"] for m in media}
+                                      | {c["id"] for c in confs})), encoding="utf-8")
+    print(f"完成:{out}  (论文 {len(fresh)} 篇,新闻 {len(news)} 则,影片/播客/文章 {len(media)} 则,会议论文 {len(confs)} 篇)")
 
 
 if __name__ == "__main__":

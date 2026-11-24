@@ -146,7 +146,28 @@ def _media_section(media, groups):
     return out + ["_只列标题与来源;影片内容程序读不到,需要重点可请 Claude 读字幕或原文。_", ""]
 
 
-def render(items_by_topic, news, today=None, x_posts=None, x_period=None, media=None, media_groups=None):
+def _conf_section(confs, order):
+    """「会议论文」区块:依会议分组;备注栏是作者自述,未经查证。"""
+    out = ["## 会议论文", ""]
+    if not confs:
+        return out + ["_近期没有符合条件的新增会议论文。_", ""]
+    for venue in order or sorted({c["source"] for c in confs}):
+        rows = [c for c in confs if c["source"] == venue]
+        if not rows:
+            continue
+        out += [f"**{venue}**", ""]
+        for c in rows:
+            title = c["title"].replace("[", "(").replace("]", ")")
+            out.append(f"- [{title}]({c['url']}) — {c['published']}")
+            out.append(f"  - 备注栏:{c.get('note', '')}")
+        out.append("")
+    return out + ["_来源:arXiv 备注栏(作者自述「已录取」,未逐篇查证);已排除 workshop 与审稿中的;"
+                  "标有 oral / spotlight / best paper / award 的排在前面。官方录取清单(OpenReview)有人机验证,程序不抓,"
+                  "所以没写会议名的论文不会出现在这里。_", ""]
+
+
+def render(items_by_topic, news, today=None, x_posts=None, x_period=None, media=None, media_groups=None,
+           confs=None, conf_order=None):
     today = today or date.today().isoformat()
     out = [f"# AI 前沿每日简报 · {today}", ""]
     for topic, items in items_by_topic.items():
@@ -169,6 +190,7 @@ def render(items_by_topic, news, today=None, x_posts=None, x_period=None, media=
     for it in news:
         out += [f"- [{it['title']}]({it['url']}) — {it['source']} ({it['published']})"]
     out.append("")
+    out += _conf_section(confs, conf_order)
     out += _media_section(media, media_groups)
     out += _x_section(x_posts, x_period)
     return "\n".join(out)

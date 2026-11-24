@@ -1,6 +1,8 @@
 """资料来源:arXiv API、HuggingFace Daily Papers、RSS。仅使用标准库。"""
 import gzip
 import json
+import re
+import time
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -47,6 +49,33 @@ def fetch_arxiv(categories, max_results, lookback_days):
             "found_via": f"arXiv API · {query}",
         })
     return items
+
+
+ARXIV_NS = "{http://arxiv.org/schemas/atom}"
+_ACCEPT = re.compile(r"\b(accepted|to appear|camera[- ]?ready|appearing|oral|spotlight|best paper|outstanding|award|highlight)\b", re.I)
+_REJECT = re.compile(r"workshop|under review|in review|submitted|submission|withdrawn|not accepted|rejected|tutorial|demo\b", re.I)
+_HIGH = re.compile(r"\b(oral|spotlight|best paper|outstanding|award|highlight)\b", re.I)
+
+
+def fetch_conference(name, query, lookback_days=14, per_venue=5):
+    """会议论文:从 arXiv 备注栏找作者自述「已录取」的主会论文(OpenReview 有人机验证,不用)。
+    过滤掉 workshop 与审稿中的;标有 oral/spotlight/best paper/award 的排前面。"""
+    url = "http://export.arxiv.org/api/query?" + urllib.parse.urlencode({
+        "search_query": f'co:"{query}"', "sortBy": "submittedDate", "sortOrder": "descending", "max_results": 100})
+    cutoff = datetime.now(timezone.utc) - timedelta(days=lookback_days)
+    rows = []
+    for e in ET.fromstring(_get(url)).findall(f"{ATOM}entry"):
+        published = datetime.fromisoformat(e.find(f"{ATOM}published").text.replace("Z", "+00:00"))
+        comment = " ".join((e.findtext(f"{ARXIV_NS}comment") or "").split())
+        if published < cutoff or not _ACCEPT.search(comment) or _REJECT.search(comment):
+            continue
+        link = e.find(f"{ATOM}id").text.strip()
+        summary = " ".join(e.find(f"{ATOM}summary").text.split())
+        rows.append((0 if _HIGH.search(comment) else 1, -published.timestamp(), {
+            "id": "conf:" + link, "title": " ".join(e.find(f"{ATOM}title").text.split()),
+            "summary": summary[:300], "url": link, "source": name, "published": published.date().isoformat(),
+            "authors": [], "note": comment[:110], "found_via": f"arXiv 备注栏 · {query}"}))
+    return [r[2] for r in sorted(rows, key=lambda r: (r[0], r[1]))[:per_venue]]
 
 
 def fetch_hf_daily():

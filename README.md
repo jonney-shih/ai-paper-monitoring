@@ -45,6 +45,13 @@ powershell -ExecutionPolicy Bypass -File .\setup_schedule.ps1 -Remove    # 取�
 `data/` 与 `reports/` 不会上传 GitHub,每台电脑各自记录「已看过」与产生报告,
 因此两台电脑的报告内容可能略有不同;之后更新程序只需 `git pull`。
 
+## 会议论文(自动)
+报告「会议论文」区块:每天到 arXiv 备注栏找作者自述「主会已录取」的论文,清单在 `config.json` 的 `conferences.venues`
+(NeurIPS / CoRL / ICML / CVPR / ACL / ICLR 2027),近 14 天、每个会议最多 5 篇,标有 oral / spotlight / best paper / award 的排前面。
+- 已排除 workshop 与「under review / submitted」的论文;ICLR 2027 要到约 2027 年 1 月放榜后才会有内容。
+- 备注栏是作者自己写的,未经查证;作者没写会议名的论文不会出现。
+- OpenReview 官方清单有人机验证(Challenge verification),程序不抓,也不绕过。
+
 ## 影片、播客与文章(自动)
 `config.json` 的 `media.feeds` 列出 YouTube 频道、播客与 newsletter 的 RSS(分 技术深度 / 产业与商业 / 每周整理 / 官方频道 四组),
 每天自动抓近 7 天、每个来源最多 2 则,略过 YouTube Shorts,放进报告「影片、播客与文章」区块。

@@ -53,6 +53,20 @@
       {"group": "official", "name": "Boston Dynamics (YouTube)", "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC7vVhkEfw4nOGp8TyDk7RcQ"}
     ]
   },
+  "conferences": {
+    "_note": "从 arXiv 备注栏找作者自述「主会已录取」的论文(过滤 workshop/审稿中);OpenReview 官方清单有人机验证,不抓。ICLR 2027 要到约 2027 年 1 月放榜后才会有内容。",
+    "enabled": true,
+    "lookback_days": 14,
+    "per_venue": 5,
+    "venues": [
+      {"name": "NeurIPS 2026", "query": "NeurIPS 2026"},
+      {"name": "CoRL 2026", "query": "CoRL 2026"},
+      {"name": "ICML 2026", "query": "ICML 2026"},
+      {"name": "CVPR 2026", "query": "CVPR 2026"},
+      {"name": "ACL 2026", "query": "ACL 2026"},
+      {"name": "ICLR 2027", "query": "ICLR 2027"}
+    ]
+  },
   "huggingface_daily": { "enabled": true },
   "rss": {
     "enabled": true,
